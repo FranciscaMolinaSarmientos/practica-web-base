@@ -38,9 +38,32 @@ mostrarProductos(productos)
 //   4. Botón "Vaciar pedido".
 // ------------------------------------------------------------
 const pedido = []
+const listaPedido = document.getElementById('lista-pedido')
+const total = document.getElementById('total')
+const btnVaciar = document.getElementById('btn-vaciar')
+catalogo.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('button[data-id]')
+    if (!boton) return
+    const id = Number(boton.dataset.id)
+    const producto = productos.find(p => p.id === id)
+    pedido.push(producto)
+    mostrarPedido()
+})
+
 
 // Escribe aquí tu código del Ejercicio 3
+function mostrarPedido() {
+    listaPedido.innerHTML = pedido.map(p => `
+        <li>${p.nombre} - $${p.precio}</li>
+    `).join('')
+    const totalPedido = pedido.reduce((suma, p) => suma + p.precio, 0)
+    total.textContent = totalPedido
+}
 
+btnVaciar.addEventListener('click', () => {
+    pedido.length = 0
+    mostrarPedido()
+})
 // ------------------------------------------------------------
 // EJERCICIO 4 — Filtrar por categoría
 // Botones de categoría que llamen a mostrarProductos() con
