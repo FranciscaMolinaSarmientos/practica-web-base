@@ -10,9 +10,34 @@
     <!-- EJERCICIO 1: construye aquí tu página (header, main con #catalogo, footer).
          Las instrucciones están en el README. -->
 
-         <header class = "bg-blue-600 text-white p-6 text-center">
-
+         <header class = "bg-blue-600 text-white p-6 text-center flex flex-col items-center">
+         <h1 class="text-3xl font bold">Alitach</h1>
+         <p>Taller de diseño, confección y personalización de textiles</p>
          </header>
+
+         <main class="p-6">
+          <div id="catalogo" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-xl font-bold text-blue-800">Chaleco de obra</h2>
+          <p>$150</p>
+          <button class="bg-blue-600 text-white p-2 hover:bg-blue-700">Agregar</button>
+        </div>
+
+         <div class="bg-white rounded-lg shadow p-4">
+        <h2 class="text-xl font-bold text-blue-800">Chaleco de admin</h2>
+        <p>$700</p>
+        <button class="bg-blue-600 text-white p-2 hover:bg-blue-700">Agregar</button>
+       </div>
+
+     <div class="bg-white rounded-lg shadow p-4">
+     <h2 class="text-xl font-bold text-blue-800">Bolsa bordada</h2>
+     <p>$350</p>
+    <button class="bg-blue-600 text-white p-2 hover:bg-blue-700">Agregar</button>
+     </div>
+          </div>
+        </main>
+
+        <footer class="bg-blue-600 text-white p-4 text-center"> Equipo ASKI </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>
