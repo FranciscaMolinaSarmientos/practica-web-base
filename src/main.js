@@ -71,3 +71,22 @@ btnVaciar.addEventListener('click', () => {
 // ------------------------------------------------------------
 
 // Escribe aquí tu código del Ejercicio 4
+const botonesCategoria = document.querySelectorAll('[data-categoria]')
+
+botonesCategoria.forEach(boton => {
+  boton.addEventListener('click', () => {
+    const categoria = boton.dataset.categoria
+    if (categoria === 'Todas') {
+      mostrarProductos(productos)
+    } else {
+      const filtrados = productos.filter(p => p.categoria === categoria)
+      mostrarProductos(filtrados)
+    }
+    botonesCategoria.forEach(b => {
+      b.classList.remove('bg-blue-600', 'text-white')
+      b.classList.add('bg-white', 'text-blue-800')
+    })
+    boton.classList.remove('bg-white', 'text-blue-800')
+    boton.classList.add('bg-blue-600', 'text-white')
+  })
+})
