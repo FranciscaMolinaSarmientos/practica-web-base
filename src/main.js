@@ -89,4 +89,62 @@ botonesCategoria.forEach(boton => {
     boton.classList.remove('bg-white', 'text-blue-800')
     boton.classList.add('bg-blue-600', 'text-white')
   })
+
+  //Ejercicio 5
+  const formulario = document.querySelector('#form-cliente')
+
+formulario.addEventListener('submit', (evento) => {
+  evento.preventDefault()
+
+  const nombre = document.querySelector('#nombre')
+  const telefono = document.querySelector('#telefono')
+  const correo = document.querySelector('#correo')
+  const errorNombre = document.querySelector('#error-nombre')
+  const errorTelefono = document.querySelector('#error-telefono')
+  const errorCorreo = document.querySelector('#error-correo')
+  const errorPedido = document.querySelector('#error-pedido')
+
+  let esValido = true
+
+  if (nombre.value.trim() === '') {
+    errorNombre.textContent = 'El nombre no puede estar vacío ni ser solo espacios'
+    errorNombre.classList.remove('hidden')
+    nombre.classList.add('border-red-600')
+    esValido = false
+  } else {
+    errorNombre.classList.add('hidden')
+    nombre.classList.remove('border-red-600')
+  }
+
+  if (!/^\d{10}$/.test(telefono.value)) {
+    errorTelefono.textContent = 'El teléfono debe tener 10 dígitos'
+    errorTelefono.classList.remove('hidden')
+    telefono.classList.add('border-red-600')
+    esValido = false
+  } else {
+    errorTelefono.classList.add('hidden')
+    telefono.classList.remove('border-red-600')
+  }
+
+  if (!/^\S+@\S+\.\S+$/.test(correo.value)) {
+    errorCorreo.textContent = 'La forma del correo debe ser algo@algo.algo'
+    errorCorreo.classList.remove('hidden')
+    correo.classList.add('border-red-600')
+    esValido = false
+  } else {
+    errorCorreo.classList.add('hidden')
+    correo.classList.remove('border-red-600')
+  }
+
+  if (pedido.length === 0) {
+    errorPedido.textContent = 'El pedido no puede estar vacío.'
+    errorPedido.classList.remove('hidden')
+    esValido = false
+  } else {
+    errorPedido.classList.add('hidden')
+  }
+  if (!esValido) {
+    return
+  }
+  })   
 })
