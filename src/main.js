@@ -89,9 +89,9 @@ botonesCategoria.forEach(boton => {
     boton.classList.remove('bg-white', 'text-blue-800')
     boton.classList.add('bg-blue-600', 'text-white')
   })
-
+})
   //Ejercicio 5
-  const formulario = document.querySelector('#form-cliente')
+const formulario = document.querySelector('#form-cliente')
 
 formulario.addEventListener('submit', (evento) => {
   evento.preventDefault()
@@ -147,4 +147,3 @@ formulario.addEventListener('submit', (evento) => {
     return
   }
   })   
-})
