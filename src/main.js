@@ -165,8 +165,8 @@ formulario.addEventListener('submit', (evento) => {
 
   const contenedorPedidosRegistrados = document.querySelector('#pedidos-registrados')
 
-   function mostrarPedidosRegistrados() {
-   contenedorPedidosRegistrados.innerHTML = pedidosRegistrados.map(p => `
+   function mostrarPedidosRegistrados(lista = pedidosRegistrados) {
+   contenedorPedidosRegistrados.innerHTML = lista.map(p => `
      <article class="border rounded-lg p-4 ${COLORES[p.estado]}">
       <h3 class="font-bold">${p.nombre}</h3>
       <ul>
@@ -198,3 +198,11 @@ const COLORES = {
   'En preparación': 'bg-blue-100 border-blue-400',
   'Entregado': 'bg-green-100 border-green-400'
 }
+
+// Ejercicio 7 extra: buscar pedidos con el nombre del cliente
+const buscador = document.querySelector('#buscador-pedidos')
+buscador.addEventListener('input', () => {
+  const texto = buscador.value.trim().toLowerCase()
+  const pedidosFiltrados = pedidosRegistrados.filter(p => p.nombre.toLowerCase().includes(texto))
+  mostrarPedidosRegistrados(pedidosFiltrados)
+})
