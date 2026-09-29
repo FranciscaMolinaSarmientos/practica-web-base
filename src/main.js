@@ -146,4 +146,55 @@ formulario.addEventListener('submit', (evento) => {
   if (!esValido) {
     return
   }
-  })   
+
+    pedidosRegistrados.push({
+    id: Date.now(),
+    nombre: nombre.value.trim(),
+    telefono: telefono.value.trim(),
+    correo: correo.value.trim(),
+    productos: [...pedido],
+    total: pedido.reduce((suma, p) => suma + p.precio, 0),
+    estado: 'Pendiente'
+  })
+
+  pedido.length = 0
+  mostrarPedido()
+  formulario.reset()
+  mostrarPedidosRegistrados()  
+  })  
+
+  const contenedorPedidosRegistrados = document.querySelector('#pedidos-registrados')
+
+   function mostrarPedidosRegistrados() {
+   contenedorPedidosRegistrados.innerHTML = pedidosRegistrados.map(p => `
+     <article class="border rounded-lg p-4 ${COLORES[p.estado]}">
+      <h3 class="font-bold">${p.nombre}</h3>
+      <ul>
+        ${p.productos.map(prod => `<li>${prod.nombre} - $${prod.precio}</li>`).join('')}
+      </ul>
+      <p class="font-bold mt-2">Total: $${p.total}</p>
+        <p>Estado: ${p.estado}</p>
+        ${p.estado !== 'Entregado' ? `<button data-avanzar="${p.id}" class="bg-blue-600 text-white p-2 mt-2">Avanzar estado</button>` : ''}
+     </article>
+    `).join('')
+}  
+
+    contenedorPedidosRegistrados.addEventListener('click', (evento) => {
+       const boton = evento.target.closest('button[data-avanzar]')
+         if (!boton) return
+       const id = Number(boton.dataset.avanzar)
+       const pedidoRegistrado = pedidosRegistrados.find(p => p.id === id)
+       const indiceActual = ESTADOS.indexOf(pedidoRegistrado.estado)
+       pedidoRegistrado.estado = ESTADOS[indiceActual + 1]
+       mostrarPedidosRegistrados()
+     })
+
+ //Ejercicio 6
+const pedidosRegistrados = []
+const ESTADOS = ['Pendiente', 'En preparación', 'Entregado']
+
+const COLORES = {
+  'Pendiente': 'bg-yellow-100 border-yellow-400',
+  'En preparación': 'bg-blue-100 border-blue-400',
+  'Entregado': 'bg-green-100 border-green-400'
+}
